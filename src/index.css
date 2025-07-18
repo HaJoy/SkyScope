@@ -3,3 +3,7 @@
 :root {
   background-color: #242424;
 }
+
+body {
+  background-color: var(--background);
+}
