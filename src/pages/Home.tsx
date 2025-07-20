@@ -1,8 +1,28 @@
+import { getWeather } from '@/api/weatherService';
 import { PageDisplay } from '@/components/layout/PageDisplay'
 import { Sun } from 'lucide-react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export const Home = () => {
+
+  const [weatherData, setWeatherData] = useState<unknown>({});
+
+  useEffect(() => {
+    const fetchCurrentWeather = async () => {
+      try {
+        const data = await getWeather('London');
+        setWeatherData(data);
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching weather: ", error);
+      }
+    }
+
+    fetchCurrentWeather();
+  
+  }, [])
+  
+
   return (
     <PageDisplay>
       <div className='flex justify-between bg-card border rounded w-full h-52 p-5'>
