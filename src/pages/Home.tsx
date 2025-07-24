@@ -1,11 +1,11 @@
-import { getWeather } from '@/api/weatherService';
+import { getWeather, type weatherDataTypes } from '@/api/weatherService';
 import { PageDisplay } from '@/components/layout/PageDisplay'
 import { Sun } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
 export const Home = () => {
 
-  const [weatherData, setWeatherData] = useState<unknown>({});
+  const [weatherData, setWeatherData] = useState<weatherDataTypes>();
 
   useEffect(() => {
     const fetchCurrentWeather = async () => {
@@ -27,12 +27,12 @@ export const Home = () => {
     <PageDisplay>
       <div className='flex justify-between bg-card border rounded w-full h-52 p-5'>
         <div className='flex flex-col justify-center gap-2'>
-          <span className='text-2xl'>Barranquilla</span>
-          <span className='text-7xl'>38</span>
+          <span className='text-2xl'>{weatherData?.name}</span>
+          <span className='text-7xl'>{Math.round((weatherData?.main.temp - 32) / 1.8)}</span>
         </div>
         <div className='flex flex-col justify-center gap-2'>
           <Sun size={90} />
-          <span className='text-2xl'>Sunny</span>
+          <span className='text-2xl'>{weatherData?.weather[0].main}</span>
         </div>
       </div>
       
